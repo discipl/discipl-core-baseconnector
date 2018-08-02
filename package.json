@@ -1,0 +1,20 @@
+{
+  "name": "discipl-core-baseconnector",
+  "version": "1.0.0",
+  "description": "base class for discipl core connectors",
+  "main": "base-connector.js",
+  "scripts": {
+    "test": "echo \"No tests here. Test the Discipl Connectors that implement the base class exported in this module\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/discipl/discipl-core-baseconnector.git"
+  },
+  "keywords": [],
+  "author": "Bas Kaptijn",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/discipl/discipl-core-baseconnector/issues"
+  },
+  "homepage": "https://github.com/discipl/discipl-core-baseconnector#readme"
+}
