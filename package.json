@@ -2,7 +2,7 @@
   "name": "discipl-core-baseconnector",
   "version": "0.1.0",
   "description": "Discipl Core connector base",
-  "main": "src/base-connector.mjs",
+  "main": "src/base-connector.js",
   "repository": "https://github.com/discipl/discipl-core-baseconnector",
   "author": "Bas Kaptijn",
   "license": "GPL-3.0",
