@@ -97,7 +97,7 @@ describe('disciple-base-connector', () => {
 
     sinon.stub(mockConnector, 'getLatestClaim').returns('wineClaimReference')
     let getStub = sinon.stub(mockConnector, 'get')
-    getStub.onCall(0).returns({ 'data': null, 'previous': 'beerClaimReference' })
+    getStub.onCall(0).returns({ 'data': { 'need': 'wine' }, 'previous': 'beerClaimReference' })
     getStub.onCall(1).returns(null)
 
    let verification = await mockConnector.verify('mockSsid', { 'need': 'beer' })
