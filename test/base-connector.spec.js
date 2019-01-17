@@ -68,7 +68,7 @@ describe('disciple-base-connector', () => {
     expect(verification).to.equal('beerClaimReference')
   })
 
-  it('should be not able to verify a claim that does not exist', async () => {
+  it('should not be able to verify a claim that does not exist', async () => {
     let mockConnector = new MockConnector()
 
     sinon.stub(mockConnector, 'getLatestClaim').returns('beerClaimReference')
@@ -79,7 +79,7 @@ describe('disciple-base-connector', () => {
     expect(mockConnector.getLatestClaim.calledOnceWith('mockSsid')).to.equal(true)
     expect(mockConnector.get.calledOnceWith('beerClaimReference', 'mockSsid')).to.equal(true)
 
-    expect(verification).to.be.undefined
+    expect(verification).to.be.null
   })
 
   it('should not be able to instantiate if the required functions are not implemented', () => {
@@ -90,5 +90,18 @@ describe('disciple-base-connector', () => {
 
   it('should not be able to be instantiated', () => {
     expect(() => new BaseConnector()).to.throw(TypeError, 'BaseConnector must be overridden')
+  })
+  // code to test the break condition
+  it('should not be able to stay stuck in the while loop when res == null', async () => {
+    let mockConnector = new MockConnector()
+
+    sinon.stub(mockConnector, 'getLatestClaim').returns('wineClaimReference')
+    let getStub = sinon.stub(mockConnector, 'get')
+    getStub.onCall(0).returns({ 'data': null, 'previous': 'beerClaimReference' })
+    getStub.onCall(1).returns(null)
+
+   let verification = await mockConnector.verify('mockSsid', { 'need': 'beer' })
+
+   expect(verification).to.be.null
   })
 })

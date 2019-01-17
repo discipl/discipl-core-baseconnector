@@ -22,9 +22,14 @@ class BaseConnector {
       if ((res != null) && (JSON.stringify(data) === JSON.stringify(res.data))) {
         return current
       }
-      current = res.previous
+      if (res != null) {
+        current = res.previous
+      }
+      else {
+        break
+      }
     }
-    return current
+    return null
   }
 }
 
