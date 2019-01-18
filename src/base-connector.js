@@ -24,8 +24,7 @@ class BaseConnector {
       }
       if (res != null) {
         current = res.previous
-      }
-      else {
+      } else {
         break
       }
     }

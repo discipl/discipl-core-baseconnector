@@ -100,8 +100,8 @@ describe('disciple-base-connector', () => {
     getStub.onCall(0).returns({ 'data': { 'need': 'wine' }, 'previous': 'beerClaimReference' })
     getStub.onCall(1).returns(null)
 
-   let verification = await mockConnector.verify('mockSsid', { 'need': 'beer' })
+    let verification = await mockConnector.verify('mockSsid', { 'need': 'beer' })
 
-   expect(verification).to.be.null
+    expect(verification).to.be.null
   })
 })
