@@ -4,7 +4,7 @@ class BaseConnector {
       throw new TypeError('BaseConnector must be overridden')
     }
 
-    let methods = ['getName', 'getSsidOfClaim', 'getLatestClaim', 'newSsid', 'claim', 'get', 'subscribe']
+    let methods = ['getName', 'getSsidOfClaim', 'getLatestClaim', 'newSsid', 'claim', 'get', 'observe']
     for (let method of methods) {
       if (this[method] === undefined || !(this[method] instanceof Function)) {
         throw new TypeError('Method ' + method + ' should be implemented')

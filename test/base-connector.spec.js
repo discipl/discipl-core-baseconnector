@@ -30,7 +30,7 @@ class MockConnector extends BaseConnector {
     return { 'data': '', 'previous': null }
   }
 
-  async subscribe (ssid) {
+  async observe (ssid) {
     return false
   }
 }
