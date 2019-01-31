@@ -104,4 +104,15 @@ describe('disciple-base-connector', () => {
 
     expect(verification).to.be.null
   })
+
+  it('import should throw not supported error when not overridden', async () => {
+    let msg = null
+    let mockConnector = new MockConnector()
+    try {
+      await mockConnector.import()
+    } catch (err) {
+      msg = err.message
+    }
+    expect(msg).to.equal('Claim import is not supported')
+  })
 })

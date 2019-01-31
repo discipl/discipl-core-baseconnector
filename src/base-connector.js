@@ -30,6 +30,10 @@ class BaseConnector {
     }
     return null
   }
+
+  async import (ssid, link, data) {
+    throw new Error('Claim import is not supported')
+  }
 }
 
 export { BaseConnector }
