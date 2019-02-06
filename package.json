@@ -16,7 +16,7 @@
   ],
   "scripts": {
     "build": "babel src/ --out-dir dist",
-    "test": "nyc --reporter=html --reporter=text node --experimental-modules ./node_modules/.bin/mocha ./test/**/*.spec.js",
+    "test": "nyc --reporter=html --reporter=text ./node_modules/.bin/mocha --require @babel/register ./test/**/*.spec.js",
     "lint": "./node_modules/standard/bin/cmd.js",
     "lint-fix": "./node_modules/standard/bin/cmd.js --fix",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/codecov/bin/codecov"
