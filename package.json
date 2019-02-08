@@ -7,7 +7,7 @@
   "repository": "https://github.com/discipl/discipl-core-baseconnector",
   "author": "Bas Kaptijn",
   "license": "GPL-3.0",
-  "publishConfig":  {
+  "publishConfig": {
     "access": "public"
   },
   "files": [
