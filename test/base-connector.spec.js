@@ -10,7 +10,7 @@ class MockConnector extends BaseConnector {
     return 'base'
   }
 
-  getSsidOfClaim (reference) {
+  getDidOfClaim (reference) {
     return null
   }
 
@@ -18,7 +18,7 @@ class MockConnector extends BaseConnector {
     return null
   }
 
-  async newSsid () {
+  async newIdentity () {
     return { 'pubkey': null, 'privkey': null }
   }
 
