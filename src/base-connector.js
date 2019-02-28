@@ -110,8 +110,8 @@ class BaseConnector {
    * Verifies existence of a claim with the given data in the channel of the given did
    *
    * @param {string} did That might have claimed the data
-   * @param {object} data Data that needs to be verified.
-   * @returns {Promise<string>}
+   * @param {object} data Data that needs to be verified
+   * @returns {Promise<string>} Link to claim that proves this data, null if such a claim does not exist
    */
   async verify (did, data) {
     let current = await this.getLatestClaim(did)
