@@ -1,3 +1,5 @@
+import stringify from 'json-stable-stringify'
+
 const DID_DELIMITER = ':'
 const LINK_PREFIX = 'link' + DID_DELIMITER + 'discipl' + DID_DELIMITER
 const DID_PREFIX = 'did' + DID_DELIMITER + 'discipl' + DID_DELIMITER
@@ -115,7 +117,7 @@ class BaseConnector {
     let current = await this.getLatestClaim(did)
     while (current != null) {
       let res = await this.get(current)
-      if ((res != null) && (JSON.stringify(data) === JSON.stringify(res.data))) {
+      if ((res != null) && (stringify(data) === stringify(res.data))) {
         return current
       }
       if (res != null) {
