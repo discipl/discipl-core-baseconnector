@@ -17,7 +17,9 @@ class BaseConnector {
   }
 
   /**
-   * Converts platform-specific reference to a claim to a link
+   * Converts platform-specific reference to a discipl-link to a claim.
+   *
+   * Can be reverted with {@link BaseConnector.referenceFromLink}
    *
    * @param {string} claimReference Reference to the claim
    * @returns {string} The link if the reference is a non-empty string. Null otherwise.
@@ -29,6 +31,14 @@ class BaseConnector {
     return null
   }
 
+  /**
+   * Converts platform-specific reference to a discipl-did
+   *
+   * Can be reverted with {@link BaseConnector.referenceFromDid}
+   *
+   * @param {string} reference Reference to the identity
+   * @returns {string} The link if the reference is a non-empty string. Null otherwise.
+   */
   didFromReference (reference) {
     if ((reference) && (typeof reference === 'string')) {
       return DID_PREFIX + this.getName() + DID_DELIMITER + reference
@@ -36,6 +46,12 @@ class BaseConnector {
     return null
   }
 
+  /**
+   * Extracts connector name from a did or link
+   *
+   * @param {string} linkOrDid String from which the connector needs to be extracted
+   * @returns {string} The name of the connector, if the input is a valid link or did. Null otherwise.
+   */
   static getConnectorName (linkOrDid) {
     if (this.isDid(linkOrDid) || this.isLink(linkOrDid)) {
       let splitted = linkOrDid.split(DID_DELIMITER)
@@ -44,6 +60,12 @@ class BaseConnector {
     return null
   }
 
+  /**
+   * Extracts the reference from a link
+   *
+   * @param {string} link
+   * @returns {string} Reference part of the link, if the link is valid. Null otherwise
+   */
   static referenceFromLink (link) {
     if (this.isLink(link)) {
       let splitted = link.split(DID_DELIMITER)
@@ -52,6 +74,12 @@ class BaseConnector {
     return null
   }
 
+  /**
+   * Extracts the reference from a did
+   *
+   * @param {string} did
+   * @returns {string} Reference part of the did, if the did is valid. Null otherwise
+   */
   static referenceFromDid (did) {
     if (this.isDid(did)) {
       let splitted = did.split(DID_DELIMITER)
@@ -60,16 +88,28 @@ class BaseConnector {
     return null
   }
 
+  /**
+   * @param {string} str Potential link
+   * @returns {boolean} True if and only if the input is a valid link
+   */
   static isLink (str) {
     return typeof str === 'string' && str.startsWith(LINK_PREFIX)
   }
 
+  /**
+   * @param {string} str Potential did
+   * @returns {boolean} True if and only if the input is a valid did
+   */
   static isDid (str) {
     return typeof str === 'string' && str.startsWith(DID_PREFIX)
   }
 
   /**
-   * Verifies existence of a claim with the given data in the channel of the given ssid
+   * Verifies existence of a claim with the given data in the channel of the given did
+   *
+   * @param {string} did That might have claimed the data
+   * @param {object} data Data that needs to be verified.
+   * @returns {Promise<string>}
    */
   async verify (did, data) {
     let current = await this.getLatestClaim(did)
@@ -87,7 +127,7 @@ class BaseConnector {
     return null
   }
 
-  async import (ssid, link, data) {
+  async import (did, link, data) {
     throw new Error('Claim import is not supported')
   }
 }
