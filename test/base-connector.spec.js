@@ -35,7 +35,55 @@ class MockConnector extends BaseConnector {
   }
 }
 
-describe('disciple-base-connector', () => {
+describe('discipl-base-connector', () => {
+  it('should correctly convert a reference to a did', () => {
+    let mockConnector = new MockConnector()
+
+    let did = mockConnector.didFromReference('fred')
+
+    expect(did).to.equal('did:discipl:base:fred')
+  })
+
+  it('return null if a non-string reference is used to create a did', () => {
+    let mockConnector = new MockConnector()
+
+    let did = mockConnector.didFromReference({ 'weird': 'object' })
+
+    expect(did).to.equal(null)
+  })
+
+  it('return null if an empty reference is used to create a did', () => {
+    let mockConnector = new MockConnector()
+
+    let did = mockConnector.didFromReference('')
+
+    expect(did).to.equal(null)
+  })
+
+  it('should correctly convert a reference to a link', () => {
+    let mockConnector = new MockConnector()
+
+    let did = mockConnector.linkFromReference('yabadabadoo')
+
+    expect(did).to.equal('link:discipl:base:yabadabadoo')
+  })
+
+  it('return null if a non-string reference is used to create a link', () => {
+    let mockConnector = new MockConnector()
+
+    let link = mockConnector.linkFromReference({ 'weird': 'object' })
+
+    expect(link).to.equal(null)
+  })
+
+  it('return null if an empty string reference is used to create a link', () => {
+    let mockConnector = new MockConnector()
+
+    let link = mockConnector.linkFromReference('')
+
+    expect(link).to.equal(null)
+  })
+
   it('should be able to verify a single claim', async () => {
     let mockConnector = new MockConnector()
 
@@ -114,5 +162,57 @@ describe('disciple-base-connector', () => {
       msg = err.message
     }
     expect(msg).to.equal('Claim import is not supported')
+  })
+
+  describe('utility functions', () => {
+    it('get the correct connector name from a link', () => {
+      let link = 'link:discipl:mock:yabadabadoo'
+
+      let connector = BaseConnector.getConnectorName(link)
+
+      expect(connector).to.equal('mock')
+    })
+
+    it('get the correct connector name from a did', () => {
+      let did = 'did:discipl:mock:fred'
+
+      let connector = BaseConnector.getConnectorName(did)
+
+      expect(connector).to.equal('mock')
+    })
+
+    it('returns null if no connector name can be found', () => {
+      let link = 'not really a did'
+
+      let connector = BaseConnector.getConnectorName(link)
+
+      expect(connector).to.equal(null)
+    })
+
+    it('get the correct reference from a link', () => {
+      let link = 'link:discipl:mock:yabadabadoo'
+
+      let reference = BaseConnector.referenceFromLink(link)
+
+      expect(reference).to.equal('yabadabadoo')
+    })
+
+    it('get the correct connector name from a did', () => {
+      let did = 'did:discipl:mock:fred'
+
+      let reference = BaseConnector.referenceFromDid(did)
+
+      expect(reference).to.equal('fred')
+    })
+
+    it('returns null if no reference can be found', () => {
+      let notDidOrLink = 'did nor there'
+
+      let reference = BaseConnector.referenceFromDid(notDidOrLink)
+      let reference2 = BaseConnector.referenceFromLink(notDidOrLink)
+
+      expect(reference).to.equal(null)
+      expect(reference2).to.equal(null)
+    })
   })
 })

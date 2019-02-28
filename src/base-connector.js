@@ -37,13 +37,27 @@ class BaseConnector {
   }
 
   static getConnectorName (linkOrDid) {
-    let splitted = linkOrDid.split(DID_DELIMITER)
-    return splitted[2]
+    if (this.isDid(linkOrDid) || this.isLink(linkOrDid)) {
+      let splitted = linkOrDid.split(DID_DELIMITER)
+      return splitted[2]
+    }
+    return null
   }
 
   static referenceFromLink (link) {
-    let splitted = link.split(DID_DELIMITER)
-    return splitted.slice(3).join(DID_DELIMITER)
+    if (this.isLink(link)) {
+      let splitted = link.split(DID_DELIMITER)
+      return splitted.slice(3).join(DID_DELIMITER)
+    }
+    return null
+  }
+
+  static referenceFromDid (did) {
+    if (this.isDid(did)) {
+      let splitted = did.split(DID_DELIMITER)
+      return splitted.slice(3).join(DID_DELIMITER)
+    }
+    return null
   }
 
   static isLink (str) {
@@ -54,14 +68,9 @@ class BaseConnector {
     return typeof str === 'string' && str.startsWith(DID_PREFIX)
   }
 
-  static referenceFromDid (did) {
-    return this.referenceFromLink(did)
-  }
-
   /**
    * Verifies existence of a claim with the given data in the channel of the given ssid
    */
-  // TODO: Parameter name
   async verify (did, data) {
     let current = await this.getLatestClaim(did)
     while (current != null) {
