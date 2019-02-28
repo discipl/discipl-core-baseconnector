@@ -46,6 +46,14 @@ class BaseConnector {
     return splitted.slice(3).join(DID_DELIMITER)
   }
 
+  static isLink (str) {
+    return typeof str === 'string' && str.startsWith(LINK_PREFIX)
+  }
+
+  static isDid (str) {
+    return typeof str === 'string' && str.startsWith(DID_PREFIX)
+  }
+
   static referenceFromDid (did) {
     return this.referenceFromLink(did)
   }
@@ -53,10 +61,11 @@ class BaseConnector {
   /**
    * Verifies existence of a claim with the given data in the channel of the given ssid
    */
-  async verify (ssid, data) {
-    let current = await this.getLatestClaim(ssid)
+  // TODO: Parameter name
+  async verify (did, data) {
+    let current = await this.getLatestClaim(did)
     while (current != null) {
-      let res = await this.get(current, ssid)
+      let res = await this.get(current)
       if ((res != null) && (JSON.stringify(data) === JSON.stringify(res.data))) {
         return current
       }

@@ -45,7 +45,7 @@ describe('disciple-base-connector', () => {
     let verification = await mockConnector.verify('mockSsid', { 'need': 'beer' })
 
     expect(mockConnector.getLatestClaim.calledOnceWith('mockSsid')).to.equal(true)
-    expect(mockConnector.get.calledOnceWith('beerClaimReference', 'mockSsid')).to.equal(true)
+    expect(mockConnector.get.calledOnceWith('beerClaimReference')).to.equal(true)
 
     expect(verification).to.equal('beerClaimReference')
   })
@@ -62,8 +62,8 @@ describe('disciple-base-connector', () => {
 
     expect(mockConnector.getLatestClaim.calledOnceWith('mockSsid')).to.equal(true)
     expect(mockConnector.get.callCount).to.equal(2)
-    expect(mockConnector.get.args[0]).to.deep.equal(['wineClaimReference', 'mockSsid'])
-    expect(mockConnector.get.args[1]).to.deep.equal(['beerClaimReference', 'mockSsid'])
+    expect(mockConnector.get.args[0]).to.deep.equal(['wineClaimReference'])
+    expect(mockConnector.get.args[1]).to.deep.equal(['beerClaimReference'])
 
     expect(verification).to.equal('beerClaimReference')
   })
@@ -77,7 +77,7 @@ describe('disciple-base-connector', () => {
     let verification = await mockConnector.verify('mockSsid', { 'need': 'a hole in the head' })
 
     expect(mockConnector.getLatestClaim.calledOnceWith('mockSsid')).to.equal(true)
-    expect(mockConnector.get.calledOnceWith('beerClaimReference', 'mockSsid')).to.equal(true)
+    expect(mockConnector.get.calledOnceWith('beerClaimReference')).to.equal(true)
 
     expect(verification).to.be.null
   })
