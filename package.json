@@ -1,13 +1,13 @@
 {
   "name": "@discipl/core-baseconnector",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Discipl Core connector base",
   "main": "dist/base-connector.js",
   "module": "src/base-connector.js",
   "repository": "https://github.com/discipl/discipl-core-baseconnector",
   "author": "Bas Kaptijn",
   "license": "GPL-3.0",
-  "publishConfig":  {
+  "publishConfig": {
     "access": "public"
   },
   "files": [
@@ -21,7 +21,9 @@
     "lint-fix": "./node_modules/standard/bin/cmd.js --fix",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && ./node_modules/codecov/bin/codecov"
   },
-  "dependencies": {},
+  "dependencies": {
+    "json-stable-stringify": "^1.0.1"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
