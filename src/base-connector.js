@@ -5,6 +5,10 @@ const LINK_PREFIX = 'link' + DID_DELIMITER + 'discipl' + DID_DELIMITER
 const DID_PREFIX = 'did' + DID_DELIMITER + 'discipl' + DID_DELIMITER
 
 class BaseConnector {
+  static get ALLOW () {
+    return 'DISCIPL_ALLOW'
+  }
+
   constructor () {
     if (new.target === BaseConnector) {
       throw new TypeError('BaseConnector must be overridden')
