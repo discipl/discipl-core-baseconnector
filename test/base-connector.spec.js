@@ -84,6 +84,10 @@ describe('discipl-base-connector', () => {
     expect(link).to.equal(null)
   })
 
+  it('should return a correct ALLOW string', () => {
+    expect(BaseConnector.ALLOW).to.equal('DISCIPL_ALLOW')
+  })
+
   it('should be able to verify a single claim', async () => {
     let mockConnector = new MockConnector()
 
@@ -110,8 +114,8 @@ describe('discipl-base-connector', () => {
 
     expect(mockConnector.getLatestClaim.calledOnceWith('mockSsid')).to.equal(true)
     expect(mockConnector.get.callCount).to.equal(2)
-    expect(mockConnector.get.args[0]).to.deep.equal(['wineClaimReference'])
-    expect(mockConnector.get.args[1]).to.deep.equal(['beerClaimReference'])
+    expect(mockConnector.get.args[0]).to.deep.equal(['wineClaimReference', null, null])
+    expect(mockConnector.get.args[1]).to.deep.equal(['beerClaimReference', null, null])
 
     expect(verification).to.equal('beerClaimReference')
   })

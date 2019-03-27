@@ -1,6 +1,6 @@
 {
   "name": "@discipl/core-baseconnector",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Discipl Core connector base",
   "main": "dist/base-connector.js",
   "module": "src/base-connector.js",
@@ -26,15 +26,15 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.2.0",
+    "@babel/core": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
-    "codecov": "^3.1.0",
+    "codecov": "^3.2.0",
     "mocha": "^5.2.0",
-    "nyc": "^13.1.0",
-    "sinon": "^7.2.2",
+    "nyc": "^13.3.0",
+    "sinon": "^7.2.5",
     "standard": "^12.0.1"
   }
 }
