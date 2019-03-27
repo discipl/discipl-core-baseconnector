@@ -113,14 +113,16 @@ class BaseConnector {
   /**
    * Verifies existence of a claim with the given data in the channel of the given did
    *
-   * @param {string} did That might have claimed the data
-   * @param {object} data Data that needs to be verified
+   * @param {string} did - That might have claimed the data
+   * @param {object} data - Data that needs to be verified
+   * @param {string} verifierDid - Did that wants to verify (used for access management)
+   * @param {string} verifierPrivkey - Private key of the verifier
    * @returns {Promise<string>} Link to claim that proves this data, null if such a claim does not exist
    */
-  async verify (did, data) {
+  async verify (did, data, verifierDid = null, verifierPrivkey = null) {
     let current = await this.getLatestClaim(did)
     while (current != null) {
-      let res = await this.get(current)
+      let res = await this.get(current, verifierDid, verifierPrivkey)
       if ((res != null) && (stringify(data) === stringify(res.data))) {
         return current
       }
